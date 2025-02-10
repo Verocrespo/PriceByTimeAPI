@@ -8,9 +8,10 @@
 		<version>3.4.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.inditex</groupId>
+	<groupId>com.inditex.price</groupId>
 	<artifactId>PriceByTimeAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>PriceByTimeAPI</name>
 	<description>Determinate the price by datetime</description>
 	<url/>
@@ -20,6 +21,11 @@
 	<developers>
 		<developer/>
 	</developers>
+	<modules>
+		<module>price-api-domain</module>
+		<module>price-api-infraestructure</module>
+		<module>price-api-app</module>
+	</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
@@ -57,14 +63,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
