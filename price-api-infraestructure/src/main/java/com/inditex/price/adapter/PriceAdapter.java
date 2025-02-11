@@ -12,6 +12,9 @@ import java.util.Date;
 public class PriceAdapter {
 
     public PriceCriteria asPriceCriteria(PriceRequest priceRequest){
+        if(priceRequest == null) {
+            return null;
+        }
 
         return PriceCriteria.builder()
                 .brandId(priceRequest.getBrandId())
@@ -21,6 +24,10 @@ public class PriceAdapter {
     }
 
     public PriceResponse asPriceResponse(Price price) {
+        if(price == null) {
+            return null;
+        }
+
         PriceResponse priceResponse = new PriceResponse();
 
         priceResponse.setPriceId(price.getId());
@@ -35,6 +42,9 @@ public class PriceAdapter {
     }
 
     public Date convertToDate(LocalDateTime dateToConvert) {
+        if(dateToConvert == null) {
+            return null;
+        }
         return java.util.Date
                 .from(dateToConvert.atZone(ZoneId.systemDefault())
                         .toInstant());
