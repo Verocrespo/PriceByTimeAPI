@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "prices")
-public class PriceEntity {
+public class Price {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -29,7 +29,7 @@ public class PriceEntity {
     private LocalDateTime endDate;
 
     @Column(nullable = false, name="PRIORITY")
-    private short priority;
+    private Short priority;
 
     @Column(nullable = false, name="PRICE")
     private BigDecimal price;
