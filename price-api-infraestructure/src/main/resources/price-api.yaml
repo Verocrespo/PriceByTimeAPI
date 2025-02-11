@@ -1,0 +1,133 @@
+openapi: 3.0.3
+info:
+  title: Price Product by Datetime
+  description: |- 
+    API for prices by datetime.
+    Some useful links:
+    - [The repository](https://github.com/Verocrespo/PriceByTimeAPI)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: vscdlr@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.1
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://localhost:8080/prices/api/v1
+tags:
+  - name: price
+    description: Get prices by datetime
+paths:
+   /price/findByDatetime:
+    post:
+      tags:
+        - price
+      summary: Finds prices by datetime
+      description: Return the final price by application date
+      operationId: findPriceByDatetime
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceRequest'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/PriceRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PriceRequest'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/PriceResponse'          
+            application/xml:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/PriceResponse'
+        '400':
+          description: Invalid status value
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/ApiErrorResponse'  
+components:
+  schemas:
+    PriceResponse:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 198772
+        brandId:
+          type: integer
+          format: int64
+          example: 198773
+        priceId:
+          type: integer
+          format: int64
+          example: 198774
+        applyStartDate:
+          type: string
+          format: date-time
+        applyEndDate:
+          type: string
+          format: date-time
+        currency:
+          type: string
+          example: EUR
+        priceValue:
+          type: number
+          x-as-bigdecimal: true
+      xml:
+        name: priceResponse
+    PriceRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+          format: int64
+          example: 198772
+        brandId:
+          type: integer
+          format: int64
+          example: 198773
+        applyDate:
+          type: string
+          format: date-time
+      xml:
+        name: priceRequest
+    ApiErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: error
+  requestBodies:
+    PriceRequest:
+      description: Price request object that needs to search prices by criteria
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PriceRequest'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/PriceRequest'
+    
