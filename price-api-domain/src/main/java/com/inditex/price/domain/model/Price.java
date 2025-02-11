@@ -1,6 +1,7 @@
 package com.inditex.price.domain.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @Table(name = "prices")
+@Builder
 public class Price {
 
     @Id
