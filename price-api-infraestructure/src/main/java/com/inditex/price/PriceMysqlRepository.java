@@ -11,12 +11,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface PriceH2Repository extends JpaRepository<Price, Long>, IPriceRepository {
+public interface PriceMysqlRepository extends JpaRepository<Price, Long>, IPriceRepository {
 
-    @Query("SELECT p " +
-            "FROM Price p "+
-            "WHERE p.productId = :#{#filter.productId} AND p.brandId = :#{#filter.brandId} "+
-            "AND  :#{#filter.applyDate} BETWEEN p.startDate AND p.endDate "
+    @Query("""
+            SELECT p 
+            FROM Price p 
+            WHERE p.productId = :#{#filter.productId} AND p.brandId = :#{#filter.brandId} 
+            AND  :#{#filter.applyDate} BETWEEN p.startDate AND p.endDate 
+            """
     )
     List<Price> findPriceByCriteria(@Param("filter") PriceCriteria priceCriteria);
 }
