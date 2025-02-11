@@ -1,2 +1,5 @@
 .idea
 /target
+/price-api-app/target
+/price-api-infraestructure/target
+/price-api-domain/target
