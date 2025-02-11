@@ -45,13 +45,9 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
                   $ref: '#/components/schemas/PriceResponse'          
             application/xml:
               schema:
-                type: object
-                items:
                   $ref: '#/components/schemas/PriceResponse'
         '400':
           description: Invalid status value
