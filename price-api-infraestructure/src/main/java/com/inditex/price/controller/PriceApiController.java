@@ -7,19 +7,20 @@ import com.inditex.price.domain.service.IPriceSearchService;
 import com.inditex.price.infraestructure.api.PriceApi;
 import com.inditex.price.infraestructure.model.PriceRequest;
 import com.inditex.price.infraestructure.model.PriceResponse;
+import com.inditex.price.validation.ValidateRequestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class PriceApiController implements PriceApi {
 
     private final IPriceSearchService priceSearchService;
+
+    private final ValidateRequestService validateRequestService;
 
     @Override
     public ResponseEntity<PriceResponse> findPriceByCriteria(PriceRequest priceRequest) {

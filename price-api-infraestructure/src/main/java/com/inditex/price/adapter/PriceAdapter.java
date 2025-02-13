@@ -15,7 +15,6 @@ public class PriceAdapter {
         if(priceRequest == null) {
             return null;
         }
-
         return PriceCriteria.builder()
                 .brandId(priceRequest.getBrandId())
                 .productId(priceRequest.getProductId())

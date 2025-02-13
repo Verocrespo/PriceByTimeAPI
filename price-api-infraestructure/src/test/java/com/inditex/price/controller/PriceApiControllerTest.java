@@ -3,22 +3,16 @@ package com.inditex.price.controller;
 import com.inditex.price.adapter.PriceAdapter;
 import com.inditex.price.infraestructure.model.PriceRequest;
 import com.inditex.price.infraestructure.model.PriceResponse;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.provider.Arguments;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,7 +50,6 @@ class PriceApiControllerTest {
 
     @Test
     @DisplayName("Request 1: 10:00 day 14, product 35455, brand 1 ZARA ")
-
     void findPriceByCriteriaRequest1() {
         PriceRequest priceRequest = createPriceRequest(PRODUCT, BRAND, 14, 10, 0);
         ResponseEntity<PriceResponse> priceResponse = restTemplate.postForEntity("/prices/findByCriteria",
@@ -69,7 +62,6 @@ class PriceApiControllerTest {
 
     @Test
     @DisplayName("Request 2: 16:00 day 14, product 35455, brand 1 ZARA ")
-
     void findPriceByCriteriaRequest2() {
         PriceRequest priceRequest = createPriceRequest(PRODUCT, BRAND, 14, 16, 0);
         ResponseEntity<PriceResponse> priceResponse = restTemplate.postForEntity("/prices/findByCriteria",
@@ -122,7 +114,7 @@ class PriceApiControllerTest {
 
         priceRequest.setProductId(productId);
         priceRequest.setBrandId(brandId);
-        LocalDateTime localDateTime = LocalDateTime.of(2020, 06, day,hour, minute);
+        LocalDateTime localDateTime = LocalDateTime.of(2020, 06, day, hour, minute);
 
 
         priceRequest.setApplyDate(priceAdapter.convertToDate(localDateTime));
