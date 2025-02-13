@@ -25,6 +25,7 @@ public class PriceApiController implements PriceApi {
     @Override
     public ResponseEntity<PriceResponse> findPriceByCriteria(PriceRequest priceRequest) {
         PriceAdapter adapter = new PriceAdapter();
+        validateRequestService.validateRequest(priceRequest);
         PriceCriteria priceCriteria = adapter.asPriceCriteria(priceRequest);
         Optional<Price> price = priceSearchService.findPriorityPriceByCriteria(priceCriteria);
 

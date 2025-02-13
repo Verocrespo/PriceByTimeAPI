@@ -1,8 +1,10 @@
 package com.inditex.price.controller;
 
 import com.inditex.price.adapter.PriceAdapter;
+import com.inditex.price.infraestructure.model.ApiErrorResponse;
 import com.inditex.price.infraestructure.model.PriceRequest;
 import com.inditex.price.infraestructure.model.PriceResponse;
+import com.inditex.price.validation.PriceRequestValidationError;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,8 +39,8 @@ class PriceApiControllerTest {
     @DisplayName("When criteria has not data then return not found")
     void findPriceByCriteriaNotFound() {
         PriceRequest priceRequest = new PriceRequest();
-        priceRequest.setBrandId(0L);
-        priceRequest.setProductId(0L);
+        priceRequest.setBrandId(1L);
+        priceRequest.setProductId(1L);
         priceRequest.setApplyDate(Date.valueOf(LocalDate.now()));
         ResponseEntity<PriceResponse> priceResponse = restTemplate.postForEntity("/prices/findByCriteria",
                 priceRequest,
@@ -106,6 +108,18 @@ class PriceApiControllerTest {
 
         assertEquals(HttpStatus.OK, priceResponse.getStatusCode());
         assertEquals(38.95, priceResponse.getBody().getPriceValue().doubleValue());
+    }
+
+    @Test
+    @DisplayName("Error bad request ")
+    void findPriceByCriteriaRequestWrongRequest() {
+        PriceRequest priceRequest = new PriceRequest();
+        ResponseEntity<ApiErrorResponse> errorResponse = restTemplate.postForEntity("/prices/findByCriteria",
+                priceRequest,
+                ApiErrorResponse.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, errorResponse.getStatusCode());
+        assertEquals(PriceRequestValidationError.BRAND_REQUIRED.getCode(), errorResponse.getBody().getCode());
     }
 
 
